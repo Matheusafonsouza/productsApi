@@ -8,7 +8,7 @@
   "migrations": [
     "./shared/infra/typeorm/migrations/*.ts"
   ],
-  "cli": [
-    "./shared/infra/typeorm/migrations"
-  ]
+  "cli": {
+    "migrationsDir": "./shared/infra/typeorm/migrations"
+  }
 }
