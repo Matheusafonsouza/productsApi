@@ -1,8 +1,9 @@
 import { getRepository, Repository } from 'typeorm';
 import ICreateProductDTO from '../../../dtos/ICreateProductDTO';
+import IProductsRepository from '../../../repositories/IProductsRepository';
 import Product from '../entities/Product';
 
-class ProductsRepository {
+class ProductsRepository implements IProductsRepository {
   private ormRepository: Repository<Product>;
 
   constructor() {

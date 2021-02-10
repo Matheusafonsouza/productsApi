@@ -19,6 +19,7 @@
     "prettier"
   ],
   "rules": {
+    "no-useless-constructor": "off",
     "no-use-before-define": "off",
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
