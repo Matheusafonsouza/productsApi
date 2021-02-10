@@ -6,9 +6,9 @@
   "password": "docker",
   "database": "productsapi",
   "migrations": [
-    "./shared/infra/typeorm/migrations/*.ts"
+    ".src/shared/infra/typeorm/migrations/*.ts"
   ],
   "cli": {
-    "migrationsDir": "./shared/infra/typeorm/migrations"
+    "migrationsDir": ".src/shared/infra/typeorm/migrations"
   }
 }
