@@ -7,5 +7,5 @@ app.get('/', (request: Request, response: Response) => {
 });
 
 app.listen(3333, () => {
-  console.log('Server running on port 3333!')
+  console.log('Server running on port 3333!');
 });
