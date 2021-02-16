@@ -4,6 +4,7 @@ import CreateProductService from '../../../services/CreateProductService';
 import FindProductsService from '../../../services/FindProductsService';
 import UpdateProductService from '../../../services/UpdateProductService';
 import DeleteProductService from '../../../services/DeleteProductService';
+import ShowProductService from '../../../services/ShowProductService';
 
 export default class ProductController {
   async index(request: Request, response: Response): Promise<Response> {
@@ -11,6 +12,20 @@ export default class ProductController {
       const findProducts = container.resolve(FindProductsService);
 
       const products = await findProducts.execute();
+
+      return response.status(200).json(products);
+    } catch (err) {
+      return response.status(400).json({ error: err });
+    }
+  }
+
+  async show(request: Request, response: Response): Promise<Response> {
+    try {
+      const { product_id } = request.params;
+
+      const findProducts = container.resolve(ShowProductService);
+
+      const products = await findProducts.execute(product_id);
 
       return response.status(200).json(products);
     } catch (err) {
