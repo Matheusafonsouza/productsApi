@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import CreateProductService from '../../../services/CreateProductService';
 import FindProductsService from '../../../services/FindProductsService';
 import UpdateProductService from '../../../services/UpdateProductService';
+import DeleteProductService from '../../../services/DeleteProductService';
 
 export default class ProductController {
   async index(request: Request, response: Response): Promise<Response> {
@@ -42,6 +43,22 @@ export default class ProductController {
       });
 
       return response.status(200).json(product);
+    } catch (err) {
+      return response.status(400).json({ error: err });
+    }
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    try {
+      const { product_id } = request.params;
+
+      const deleteProduct = container.resolve(DeleteProductService);
+
+      await deleteProduct.execute(product_id);
+
+      return response
+        .status(200)
+        .json({ message: 'Product successfully deleted!' });
     } catch (err) {
       return response.status(400).json({ error: err });
     }
