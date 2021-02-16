@@ -1,5 +1,5 @@
 import { getRepository, Repository } from 'typeorm';
-import ICreateSku from '../../../dtos/ICreateSkuDTO';
+import ICreateSkuDTO from '../../../dtos/ICreateSkuDTO';
 import ISkusRepository from '../../../repositories/ISkusRepository';
 import Sku from '../entities/Sku';
 
@@ -10,11 +10,17 @@ class SkusRepository implements ISkusRepository {
     this.ormRepository = getRepository(Sku);
   }
 
-  public async create({ size, amount, value }: ICreateSku): Promise<Sku> {
+  public async create({
+    size,
+    amount,
+    value,
+    product_id,
+  }: ICreateSkuDTO): Promise<Sku> {
     const sku = this.ormRepository.create({
       size,
       amount,
       value,
+      product_id,
     });
 
     await this.ormRepository.save(sku);

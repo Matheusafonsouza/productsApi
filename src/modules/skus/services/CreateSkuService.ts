@@ -10,14 +10,20 @@ class CreateSkuService {
     private skusRepository: ISkuRepository,
   ) { }
 
-  public async execute({ size, amount, value }: ICreateSkuDTO): Promise<Sku> {
-    const product = await this.skusRepository.create({
+  public async execute({
+    size,
+    amount,
+    value,
+    product_id,
+  }: ICreateSkuDTO): Promise<Sku> {
+    const sku = await this.skusRepository.create({
       size,
       amount,
       value,
+      product_id,
     });
 
-    return product;
+    return sku;
   }
 }
 

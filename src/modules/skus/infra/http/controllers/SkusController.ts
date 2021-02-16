@@ -7,30 +7,40 @@ import UpdateSkuService from '../../../services/UpdateSkuService';
 
 export default class SkuController {
   async index(request: Request, response: Response): Promise<Response> {
-    const findSkus = container.resolve(FindSkusService);
+    try {
+      const findSkus = container.resolve(FindSkusService);
 
-    const skus = await findSkus.execute();
+      const skus = await findSkus.execute();
 
-    return response.status(200).json(skus);
+      return response.status(200).json(skus);
+    } catch (err) {
+      console.log(err);
+      return response.status(400).json({ error: err });
+    }
   }
 
   async create(request: Request, response: Response): Promise<Response> {
-    const { size, amount, value } = request.body;
+    try {
+      const { size, amount, value, product_id } = request.body;
 
-    const createSku = container.resolve(CreateSkuService);
+      const createSku = container.resolve(CreateSkuService);
 
-    const sku = await createSku.execute({
-      size,
-      amount,
-      value,
-    });
+      const sku = await createSku.execute({
+        size,
+        amount,
+        value,
+        product_id,
+      });
 
-    return response.status(200).json(sku);
+      return response.status(200).json(sku);
+    } catch (err) {
+      return response.status(400).json({ error: err });
+    }
   }
 
   async update(request: Request, response: Response): Promise<Response> {
     try {
-      const { size, amount, value } = request.body;
+      const { size, amount, value, product_id } = request.body;
       const { sku_id } = request.params;
 
       const updateSku = container.resolve(UpdateSkuService);
@@ -40,6 +50,7 @@ export default class SkuController {
         amount,
         value,
         sku_id,
+        product_id,
       });
 
       return response.status(200).json(sku);

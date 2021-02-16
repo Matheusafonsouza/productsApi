@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import Product from '../../../../products/infra/typeorm/entities/Product';
 
 @Entity('skus')
 class Sku {
@@ -19,6 +22,13 @@ class Sku {
 
   @Column()
   value: number;
+
+  @Column()
+  product_id: string;
+
+  @ManyToOne(() => Product)
+  @JoinColumn({ name: 'product_id' })
+  product: Product;
 
   @CreateDateColumn()
   created_at: string;

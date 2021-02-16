@@ -7,25 +7,33 @@ import DeleteProductService from '../../../services/DeleteProductService';
 
 export default class ProductController {
   async index(request: Request, response: Response): Promise<Response> {
-    const findProducts = container.resolve(FindProductsService);
+    try {
+      const findProducts = container.resolve(FindProductsService);
 
-    const products = await findProducts.execute();
+      const products = await findProducts.execute();
 
-    return response.status(200).json(products);
+      return response.status(200).json(products);
+    } catch (err) {
+      return response.status(400).json({ error: err });
+    }
   }
 
   async create(request: Request, response: Response): Promise<Response> {
-    const { name, description, company } = request.body;
+    try {
+      const { name, description, company } = request.body;
 
-    const createProduct = container.resolve(CreateProductService);
+      const createProduct = container.resolve(CreateProductService);
 
-    const product = await createProduct.execute({
-      name,
-      description,
-      company,
-    });
+      const product = await createProduct.execute({
+        name,
+        description,
+        company,
+      });
 
-    return response.status(200).json(product);
+      return response.status(200).json(product);
+    } catch (err) {
+      return response.status(400).json({ error: err });
+    }
   }
 
   async update(request: Request, response: Response): Promise<Response> {

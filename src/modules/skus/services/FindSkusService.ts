@@ -11,7 +11,6 @@ class FindSkusService {
 
   public async execute(): Promise<Sku[]> {
     const skus = await this.skuRepository.findAll();
-
     return skus;
   }
 }
