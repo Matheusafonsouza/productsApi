@@ -1,0 +1,25 @@
+version: '3.4'
+
+volumes:
+  postgres_data:
+
+services:
+  app:
+    build: .
+    ports:
+      - '3333:3333'
+    command: npm run dev
+    container_name: project_app
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: project_db
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=productsapi
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgres
