@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import ISkuRepository from '../repositories/ISkusRepository';
 import IUpdateSkuDTO from '../dtos/IUpdateSkuDTO';
 import Sku from '../infra/typeorm/entities/Sku';
+import AppError from '../../../shared/errors/AppError';
 
 @injectable()
 class UpdateSkuService {
@@ -19,7 +20,7 @@ class UpdateSkuService {
     const sku = await this.skusRepository.findById(sku_id);
 
     if (!sku) {
-      throw new Error('Sku not found');
+      throw new AppError('Sku not found', 404);
     }
 
     const updatedSku = await this.skusRepository.save({

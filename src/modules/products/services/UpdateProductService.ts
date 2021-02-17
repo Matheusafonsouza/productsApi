@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import Product from '../infra/typeorm/entities/Product';
 import IProductsRepository from '../repositories/IProductsRepository';
 import IUpdateProductDTO from '../dtos/IUpdateProductDTO';
+import AppError from '../../../shared/errors/AppError';
 
 @injectable()
 class UpdateProductService {
@@ -19,7 +20,7 @@ class UpdateProductService {
     const product = await this.productsReposity.findById(product_id);
 
     if (!product) {
-      throw new Error('Product not found');
+      throw new AppError('Product not found', 404);
     }
 
     const updatedProduct = await this.productsReposity.save({

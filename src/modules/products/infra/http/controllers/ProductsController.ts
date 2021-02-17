@@ -8,82 +8,62 @@ import ShowProductService from '../../../services/ShowProductService';
 
 export default class ProductController {
   async index(request: Request, response: Response): Promise<Response> {
-    try {
-      const findProducts = container.resolve(FindProductsService);
+    const findProducts = container.resolve(FindProductsService);
 
-      const products = await findProducts.execute();
+    const products = await findProducts.execute();
 
-      return response.status(200).json(products);
-    } catch (err) {
-      return response.status(400).json({ error: err });
-    }
+    return response.status(200).json(products);
   }
 
   async show(request: Request, response: Response): Promise<Response> {
-    try {
-      const { product_id } = request.params;
+    const { product_id } = request.params;
 
-      const findProducts = container.resolve(ShowProductService);
+    const findProducts = container.resolve(ShowProductService);
 
-      const products = await findProducts.execute(product_id);
+    const products = await findProducts.execute(product_id);
 
-      return response.status(200).json(products);
-    } catch (err) {
-      return response.status(400).json({ error: err });
-    }
+    return response.status(200).json(products);
   }
 
   async create(request: Request, response: Response): Promise<Response> {
-    try {
-      const { name, description, company } = request.body;
+    const { name, description, company } = request.body;
 
-      const createProduct = container.resolve(CreateProductService);
+    const createProduct = container.resolve(CreateProductService);
 
-      const product = await createProduct.execute({
-        name,
-        description,
-        company,
-      });
+    const product = await createProduct.execute({
+      name,
+      description,
+      company,
+    });
 
-      return response.status(200).json(product);
-    } catch (err) {
-      return response.status(400).json({ error: err });
-    }
+    return response.status(200).json(product);
   }
 
   async update(request: Request, response: Response): Promise<Response> {
-    try {
-      const { name, description, company } = request.body;
-      const { product_id } = request.params;
+    const { name, description, company } = request.body;
+    const { product_id } = request.params;
 
-      const updateProduct = container.resolve(UpdateProductService);
+    const updateProduct = container.resolve(UpdateProductService);
 
-      const product = await updateProduct.execute({
-        name,
-        description,
-        company,
-        product_id,
-      });
+    const product = await updateProduct.execute({
+      name,
+      description,
+      company,
+      product_id,
+    });
 
-      return response.status(200).json(product);
-    } catch (err) {
-      return response.status(400).json({ error: err });
-    }
+    return response.status(200).json(product);
   }
 
   async delete(request: Request, response: Response): Promise<Response> {
-    try {
-      const { product_id } = request.params;
+    const { product_id } = request.params;
 
-      const deleteProduct = container.resolve(DeleteProductService);
+    const deleteProduct = container.resolve(DeleteProductService);
 
-      await deleteProduct.execute(product_id);
+    await deleteProduct.execute(product_id);
 
-      return response
-        .status(200)
-        .json({ message: 'Product successfully deleted!' });
-    } catch (err) {
-      return response.status(400).json({ error: err });
-    }
+    return response
+      .status(200)
+      .json({ message: 'Product successfully deleted!' });
   }
 }

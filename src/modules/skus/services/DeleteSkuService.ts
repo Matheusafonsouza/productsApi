@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '../../../shared/errors/AppError';
 import ISkuRepository from '../repositories/ISkusRepository';
 
 @injectable()
@@ -12,7 +13,7 @@ class DeleteSkuService {
     const sku = await this.skusRepository.findById(sku_id);
 
     if (!sku) {
-      throw new Error('Sku not found');
+      throw new AppError('Sku not found', 404);
     }
 
     await this.skusRepository.delete(sku_id);

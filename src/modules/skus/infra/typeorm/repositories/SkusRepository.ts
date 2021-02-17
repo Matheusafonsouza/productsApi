@@ -33,8 +33,8 @@ class SkusRepository implements ISkusRepository {
     return sku;
   }
 
-  public async findAll(): Promise<Sku[]> {
-    const skus = await this.ormRepository.find();
+  public async findAll(product_id: string): Promise<Sku[]> {
+    const skus = await this.ormRepository.find({ where: { product_id } });
     return skus;
   }
 

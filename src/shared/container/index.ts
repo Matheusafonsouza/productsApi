@@ -1,4 +1,7 @@
 import { container } from 'tsyringe';
+
+import '../../modules/users/providers';
+
 import ProductsRepository from '../../modules/products/infra/typeorm/repositories/ProductsRepository';
 import IProductsRepository from '../../modules/products/repositories/IProductsRepository';
 import SkusRepository from '../../modules/skus/infra/typeorm/repositories/SkusRepository';

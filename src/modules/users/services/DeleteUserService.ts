@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '../../../shared/errors/AppError';
 import IUserRepository from '../repositories/IUserRepository';
 
 @injectable()
@@ -12,7 +13,7 @@ class DeleteUserService {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
-      throw new Error('User not found');
+      throw new AppError('User not found', 404);
     }
 
     await this.usersRepository.delete(user_id);
