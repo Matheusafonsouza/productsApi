@@ -1,9 +1,12 @@
 import { Router } from 'express';
+import ensureAuthenticated from '../../../../users/infra/http/middlewares/ensureAuthenticated';
 import SkuController from '../controllers/SkusController';
 
 const skuRouter = Router();
 
 const skuController = new SkuController();
+
+skuRouter.use(ensureAuthenticated);
 
 skuRouter.get('/', skuController.index);
 skuRouter.post('/', skuController.create);
