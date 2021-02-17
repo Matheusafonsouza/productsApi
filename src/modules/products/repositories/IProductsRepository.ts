@@ -7,4 +7,5 @@ export default interface IProductsRepository {
   delete(product_id: string): Promise<void>;
   save(product: Product): Promise<Product>;
   findById(id: string): Promise<Product | undefined>;
+  findByName(name: string): Promise<Product | undefined>;
 }
