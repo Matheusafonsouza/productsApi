@@ -6,7 +6,7 @@ class DeleteSkuService {
   constructor(
     @inject('SkusRepository')
     private skusRepository: ISkuRepository,
-  ) { }
+  ) {}
 
   public async execute(sku_id: string): Promise<void> {
     const sku = await this.skusRepository.findById(sku_id);

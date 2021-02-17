@@ -8,7 +8,7 @@ class CreateSkuService {
   constructor(
     @inject('SkusRepository')
     private skusRepository: ISkuRepository,
-  ) { }
+  ) {}
 
   public async execute({
     size,

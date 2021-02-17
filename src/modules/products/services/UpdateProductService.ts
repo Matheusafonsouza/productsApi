@@ -8,7 +8,7 @@ class UpdateProductService {
   constructor(
     @inject('ProductsRepository')
     private productsReposity: IProductsRepository,
-  ) { }
+  ) {}
 
   public async execute({
     company,

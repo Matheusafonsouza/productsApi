@@ -7,7 +7,7 @@ class ShowProductService {
   constructor(
     @inject('ProductsRepository')
     private productsReposity: IProductsRepository,
-  ) { }
+  ) {}
 
   public async execute(product_id: string): Promise<Product> {
     const product = await this.productsReposity.findById(product_id);

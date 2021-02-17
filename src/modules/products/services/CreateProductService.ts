@@ -8,7 +8,7 @@ class CreateProductService {
   constructor(
     @inject('ProductsRepository')
     private productsReposity: IProductsRepository,
-  ) { }
+  ) {}
 
   public async execute({
     name,

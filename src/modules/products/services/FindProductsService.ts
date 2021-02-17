@@ -7,7 +7,7 @@ class FindProductsService {
   constructor(
     @inject('ProductsRepository')
     private productsReposity: IProductsRepository,
-  ) { }
+  ) {}
 
   public async execute(): Promise<Product[]> {
     const product = await this.productsReposity.findAll();

@@ -8,7 +8,7 @@ class UpdateSkuService {
   constructor(
     @inject('SkusRepository')
     private skusRepository: ISkuRepository,
-  ) { }
+  ) {}
 
   public async execute({
     amount,

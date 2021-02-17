@@ -7,7 +7,7 @@ class FindSkusService {
   constructor(
     @inject('SkusRepository')
     private skuRepository: ISkuRepository,
-  ) { }
+  ) {}
 
   public async execute(): Promise<Sku[]> {
     const skus = await this.skuRepository.findAll();

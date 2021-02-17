@@ -6,7 +6,7 @@ class DeleteProductService {
   constructor(
     @inject('ProductsRepository')
     private productsReposity: IProductsRepository,
-  ) { }
+  ) {}
 
   public async execute(product_id: string): Promise<void> {
     const product = await this.productsReposity.findById(product_id);
