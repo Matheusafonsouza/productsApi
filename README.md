@@ -21,10 +21,18 @@ git clone https://github.com/Matheusafonsouza/productsApi.git
 Em seguida, acesse a pasta que foi baixada em sua máquina e execute o seguinte comando para subir a aplicação através do docker-compose:
 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 Caso você não tenha o Docker ou o Docker-compose instalado em sua máquina, seguem ótimos guias para a instalação de ambos:
 
 * [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt)
 * [Docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt)
+
+# Rotas
+
+Para acessar as rotas do sistema, recomendo a instalação do software insomnia:
+
+* [Insomnia](https://insomnia.rest/download/)
+
+E importe o arquivo productsApi.json, encontrado na pasta docs.
