@@ -9,10 +9,10 @@ class FindProductsService {
     private productsReposity: IProductsRepository,
   ) {}
 
-  public async execute(): Promise<Product[]> {
-    const product = await this.productsReposity.findAll();
+  public async execute(user_id: string): Promise<Product[]> {
+    const products = await this.productsReposity.findAll(user_id);
 
-    return product;
+    return products;
   }
 }
 

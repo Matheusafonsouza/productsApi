@@ -1,5 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import ICreateProductDTO from '../../../dtos/ICreateProductDTO';
+import IFindProductDTO from '../../../dtos/IFindProductDTO';
 import IProductsRepository from '../../../repositories/IProductsRepository';
 import Product from '../entities/Product';
 
@@ -14,11 +15,13 @@ class ProductsRepository implements IProductsRepository {
     company,
     description,
     name,
+    user_id,
   }: ICreateProductDTO): Promise<Product> {
     const product = this.ormRepository.create({
       name,
       description,
       company,
+      user_id,
     });
 
     await this.ormRepository.save(product);
@@ -33,13 +36,18 @@ class ProductsRepository implements IProductsRepository {
     return product;
   }
 
-  public async findByName(name: string): Promise<Product | undefined> {
-    const product = await this.ormRepository.findOne({ where: { name } });
+  public async findProduct({
+    name,
+    user_id,
+  }: IFindProductDTO): Promise<Product | undefined> {
+    const product = await this.ormRepository.findOne({
+      where: { name, user_id },
+    });
     return product;
   }
 
-  public async findAll(): Promise<Product[]> {
-    const products = await this.ormRepository.find();
+  public async findAll(user_id: string): Promise<Product[]> {
+    const products = await this.ormRepository.find({ where: { user_id } });
     return products;
   }
 

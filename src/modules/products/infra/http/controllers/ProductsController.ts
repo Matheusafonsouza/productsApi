@@ -9,8 +9,9 @@ import ShowProductService from '../../../services/ShowProductService';
 export default class ProductController {
   async index(request: Request, response: Response): Promise<Response> {
     const findProducts = container.resolve(FindProductsService);
+    const { id } = request.user;
 
-    const products = await findProducts.execute();
+    const products = await findProducts.execute(id);
 
     return response.status(200).json(products);
   }
@@ -27,6 +28,7 @@ export default class ProductController {
 
   async create(request: Request, response: Response): Promise<Response> {
     const { name, description, company } = request.body;
+    const { id } = request.user;
 
     const createProduct = container.resolve(CreateProductService);
 
@@ -34,6 +36,7 @@ export default class ProductController {
       name,
       description,
       company,
+      user_id: id,
     });
 
     return response.status(200).json(product);

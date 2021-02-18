@@ -15,8 +15,12 @@ class CreateProductService {
     name,
     description,
     company,
+    user_id,
   }: ICreateProductDTO): Promise<Product> {
-    const findProductByName = await this.productsReposity.findByName(name);
+    const findProductByName = await this.productsReposity.findProduct({
+      name,
+      user_id,
+    });
 
     if (findProductByName) {
       throw new AppError('Product already exists.');
@@ -26,6 +30,7 @@ class CreateProductService {
       company,
       description,
       name,
+      user_id,
     });
 
     return product;
