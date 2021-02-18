@@ -2,6 +2,7 @@ version: '3.4'
 
 volumes:
   postgres_data:
+  node_modules:
 
 services:
   app:
@@ -11,7 +12,8 @@ services:
     command: [sh, -c, "npm run typeorm migration:run && npm run dev"]
     container_name: project_app
     volumes:
-      - .:/usr/app
+      - .:/app
+      - node_modules:/app/node_modules
     depends_on:
       - db
 
@@ -25,3 +27,4 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgres
+

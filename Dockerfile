@@ -1,10 +1,11 @@
 FROM node:alpine
-WORKDIR /usr/app
+RUN mkdir /app
+WORKDIR /app
 COPY package.json yarn.lock ./
 
 RUN yarn install
 
-COPY . .
+COPY . /app
 
 EXPOSE 3333
 
